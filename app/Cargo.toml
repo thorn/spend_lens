@@ -1,0 +1,16 @@
+[package]
+name = "app"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json", "blocking", "multipart", "cookies", "gzip", "deflate", "stream"] }
+tokio = { version = "1", features = ["full"]}
+regex = { version = "1"}
+url = { version = "2.3.1", features = ["serde"] }
+urlencoding = "2.1.2"
+
+[dev-dependencies]
+assert_matches = "1.5.0"

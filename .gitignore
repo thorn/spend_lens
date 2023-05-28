@@ -1,0 +1,7 @@
+/target
+/app_config/config/*.local.yml
+/app_config/config/local.yml
+.DS_Store
+.idea
+.vscode
+.env

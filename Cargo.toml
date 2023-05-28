@@ -1,0 +1,26 @@
+[package]
+name = "spend_lens"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace]
+members = [
+    "app",
+    "web_app",
+    "background_jobs",
+    "migration",
+    "app_config"
+]
+
+
+[dependencies]
+app = { path = "./app" }
+web_app = { path = "./web_app" }
+background_jobs = { path = "./background_jobs" }
+migration = { path = "./migration" }
+app_config = { path = "./app_config" }
+
+# Database dependencies
+sea-orm = { version = "0.11.3", features = ["sqlx-postgres", "runtime-async-std-native-tls", "macros"] }
+futures = "0.3.28"

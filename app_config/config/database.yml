@@ -1,0 +1,10 @@
+database:
+  development:
+    url: "postgresql://toptal:toptal@localhost:5432"
+    database: "spend_lens_development"
+  test:
+    url: "postgresql://toptal:toptal@localhost:5432"
+    database: "spend_lens_testing"
+  production:
+    url: ""
+    database: "spend_lens_production"
