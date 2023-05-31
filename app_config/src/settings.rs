@@ -32,7 +32,7 @@ impl Settings {
       &env::current_exe().expect("Cannot query current directory").parent().expect("Fail!")
     ).join("config");
 
-    // TODO: Resolve this tmp madness!
+    // This tmp madness is caused by https://github.com/rust-lang/rust/issues/15023
     let tmp = config_dir.join("default.yml");
     let default_config_path = File::with_name(tmp.to_str().expect("default config failed"));
 

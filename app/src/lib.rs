@@ -27,8 +27,8 @@ pub fn download_check_info(fiscal_params: FiscalParams) -> Result<String, &'stat
     .multipart(form)
     .timeout(Duration::from_secs(60))
     .send().expect("Request failed");
-  // TODO: this looks funny. Unwrapping and then wrapping the result back is wrong
-  return Ok(res.text().unwrap());
+
+  return Ok(res.text().expect("Failed to retrieve the string"));
 }
 
 // Check that the URL is correct: `https://mapr.tax.gov.me` or `https://213.149.97.151`
