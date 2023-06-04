@@ -1,6 +1,5 @@
 use std::time::Duration;
 use regex::Regex;
-use url::{Url};
 use urlencoding;
 
 const IIC_REGEX: &str = r"\.*iic\=([0-9a-fA-F]{32}).*";
@@ -51,7 +50,7 @@ pub fn verify_invoice_url(check_url: &str) -> Result<(), &'static str>{
     String::from("https://suf.purs.gov.rs"),
   ];
 
-  let parsed_url_result = Url::parse(&check_url);
+  let parsed_url_result = reqwest::Url::parse(&check_url);
   if parsed_url_result.is_err() { return Err("wrong_check_url"); }
 
   let parsed_url = parsed_url_result.unwrap();
@@ -88,7 +87,7 @@ pub fn extract_params_from_url(check_url: &str) -> Result<FiscalParams, &'static
   // TODO: extract this to an upper level
   let check_url = urlencoding::decode(check_url).expect("UTF-8");
 
-  let parsed_url = Url::parse(&check_url).map_err(|_| "URL parsing failed")?;
+  let parsed_url = reqwest::Url::parse(&check_url).map_err(|_| "URL parsing failed")?;
   let fragment = parsed_url.fragment().ok_or("Missing fragment")?;
   let fragment_params: Vec<&str> = fragment.split('?').collect();
 

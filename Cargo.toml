@@ -13,6 +13,26 @@ members = [
     "app_config"
 ]
 
+[workspace.dependencies]
+actix-rt = "2.8.0"
+anyhow = "1.0.71"
+assert_matches = "1.5.0"
+futures = "0.3.28"
+regex = { version = "1.8.3"}
+sea-orm = { version = "0.11.3", features = ["sqlx-postgres", "runtime-tokio-rustls", "macros"] }
+sea-orm-migration = { version = "0.11.0", default-features = false, features = ["cli", "runtime-tokio-rustls", "sqlx-postgres"] }
+serde = { version="1.0.163" }
+serde_derive = "1.0.163"
+sqlx-rt = { version = "0.6.3", features = ["runtime-tokio-rustls"] }
+tokio = { version = "1.28.2", features = ["full"] }
+tracing = "0.1.37"
+tracing-subscriber = "0.3.17"
+
+[workspace.package]
+version = "0.1.0"
+authors = ["Arsen Shamkhalov"]
+description = "Spending analysis app for Montenegro"
+documentation = "https://github.com/thorn/spend_lens"
 
 [dependencies]
 app = { path = "./app" }
@@ -20,7 +40,3 @@ web_app = { path = "./web_app" }
 background_jobs = { path = "./background_jobs" }
 migration = { path = "./migration" }
 app_config = { path = "./app_config" }
-
-# Database dependencies
-sea-orm = { version = "0.11.3", features = ["sqlx-postgres", "runtime-async-std-native-tls", "macros"] }
-futures = "0.3.28"
