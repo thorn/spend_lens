@@ -3,11 +3,10 @@ extern crate core;
 use async_std::task::block_on;
 use sea_orm_migration::prelude::*;
 use sea_orm::{ConnectionTrait, Database, DbBackend, DbErr, Statement};
-use app_config;
-use app_config::settings::{DBEnvConfig};
+use app_config::{Config, ConfigError};
+use app_config::settings::DBEnvConfig;
 use migration::{Migrator, MigratorTrait};
 use migration::sea_orm::DatabaseConnection;
-use app_config::{Config, ConfigError};
 
 use clap::{Parser, Subcommand};
 
@@ -112,7 +111,7 @@ enum Commands {
 async fn main() {
   let args = Cli::parse();
 
-  let config = app_config::config().unwrap_or_else(|err| {
+  let config = app_config::build_config().unwrap_or_else(|err| {
     panic!("Error retrieving app config: {:?}", err)
   });
 
