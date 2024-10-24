@@ -1,8 +1,7 @@
 use std::time::Duration;
 use regex::Regex;
-use urlencoding;
 
-const IIC_REGEX: &str = r"\.*iic\=([0-9a-fA-F]{32}).*";
+const IIC_REGEX: &str = r".*iic\=([0-9a-fA-F]{32}).*";
 const TIN_REGEX: &str = r".*tin\=(\d{8}).*";
 const CRTD_REGEX: &str = r".*crtd\=(\d{4}-\d{2}-\d{2}T\d{2}:(\d{2}):(\d{2}(?:\.\d*)?)((-(\d{2}):(\d{2})|Z)?)).*";
 
@@ -27,7 +26,7 @@ pub fn download_check_info(fiscal_params: FiscalParams) -> Result<String, &'stat
     .timeout(Duration::from_secs(60))
     .send().expect("Request failed");
 
-  return Ok(res.text().expect("Failed to retrieve the string"));
+  Ok(res.text().expect("Failed to retrieve the string"))
 }
 
 // Check that the URL is correct: `https://mapr.tax.gov.me` or `https://213.149.97.151`
@@ -80,7 +79,7 @@ pub fn verify_invoice_url(check_url: &str) -> Result<(), &'static str>{
     return Err("tin_param_is_missing_or_wrong_format");
   }
 
-  return Ok(());
+  Ok(())
 }
 
 pub fn extract_params_from_url(check_url: &str) -> Result<FiscalParams, &'static str> {
@@ -104,7 +103,7 @@ pub fn extract_params_from_url(check_url: &str) -> Result<FiscalParams, &'static
   let params: std::collections::HashMap<&str, &str> = params.into_iter().collect();
 
   let iic = params.get("iic").ok_or("iic_param_is_missing_or_wrong_format")?.to_string();
-  let crtd = params.get("crtd").ok_or("crtd_param_is_missing_or_wrong_format")?.replace("+", " ");
+  let crtd = params.get("crtd").ok_or("crtd_param_is_missing_or_wrong_format")?.replace('+', " ");
   let tin = params.get("tin").ok_or("tin_param_is_missing_or_wrong_format")?.to_string();
 
   Ok(FiscalParams {

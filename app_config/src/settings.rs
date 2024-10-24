@@ -26,7 +26,7 @@ pub struct Settings {
 }
 
 impl Settings {
-  pub fn new() -> Result<Config, ConfigError> {
+  pub fn build() -> Result<Config, ConfigError> {
     let env_name = env::var("ENV").unwrap_or_else(|_| "development".into());
     let config_dir = Path::new(
       &env::current_exe().expect("Cannot query current directory").parent().expect("Fail!")
@@ -45,7 +45,7 @@ impl Settings {
     let tmp = config_dir.join("local.yml");
     let local_config_file = File::with_name(tmp.to_str().expect(""));
 
-    let s = Config::builder()
+    Config::builder()
       .add_source(default_config_path)
       .add_source(env_config_file_path.required(true))
       .add_source(database_config.required(true))
@@ -60,10 +60,9 @@ impl Settings {
       // Eg.. `SPEND_LENS_DEBUG=1 ./target/app` would set the `debug` key
       .add_source(Environment::with_prefix("spend_lens"))
 
-      .build();
+      .build()
 
     // You can deserialize (and thus freeze) the entire configuration as
     // s.try_deserialize()
-    s
   }
 }

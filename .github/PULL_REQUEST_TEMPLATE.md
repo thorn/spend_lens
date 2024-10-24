@@ -24,9 +24,9 @@ Describe the changes and motivations for the pull request, unless evident from t
 
 ### Screenshots
 
-| Before.                                      | After.                                       |
-| -------------------------------------------- | -------------------------------------------- |
-| Insert screenshots or screen recordings      | Insert screenshots or screen recordings      |
+| Before.                                 | After.                                  |
+|-----------------------------------------|-----------------------------------------|
+| Insert screenshots or screen recordings | Insert screenshots or screen recordings |
 
 ### Other
 
